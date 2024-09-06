@@ -2,6 +2,7 @@ import express from 'express';
 import userRoutes from './routes/user.routes';
 import { AppDataSource } from './config/database.config';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -9,13 +10,12 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/api/users', userRoutes);
 
-app.get('/', (req, res) => {
-    res.json("Server up and running!")
-})
+app.get('/', (req, res) => { res.json("Server up and running!") })
 
 // Start server
 const PORT = process.env.PORT || 3000;
